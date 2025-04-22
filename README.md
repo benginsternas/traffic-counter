@@ -58,8 +58,7 @@ Die **TrafficCounter**-App ist eine einfache Android-Anwendung, die den Verkehr 
 
 ## Screenshots
 
-![CounterScreen](Screenshots/CounterScreen.png)
-![ListScreen](Screenshots/ListScreen.png)
+<img alt="CounterScreen" src="Screenshots/CounterScreen.png" title="CounterScreen" width="450"/> <img alt="ListScreen" src="Screenshots/ListScreen.png" title="ListScreen" width="450"/>
 
 ---
 
