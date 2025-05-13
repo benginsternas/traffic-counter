@@ -1,9 +1,3 @@
-//
-//  ListScreen.kt
-//  TrafficCounter
-//  Erstellt von Bengin Sternas am 16.04.2025
-//
-
 package de.thkoeln.vma.trafficcounter
 
 import androidx.compose.foundation.layout.*
@@ -15,8 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModel
 
-// Composable für den ListScreen
 @Composable
 fun ListScreen(navController: NavController, viewModel: TrafficViewModel) {
     val traffics = viewModel.trafficList // Daten aus dem ViewModel
@@ -28,18 +22,10 @@ fun ListScreen(navController: NavController, viewModel: TrafficViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // Liste der erfassten Daten
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(traffics) { traffic ->
                 TrafficCard(traffic = traffic)
             }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Button zur Navigation zurück zum Zähler
-        Button(onClick = { navController.navigate("counter") }) {
-            Text("Zurück zum Zähler")
         }
     }
 }
