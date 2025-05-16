@@ -1,6 +1,14 @@
+//
+//  TrafficBottomNavigationBar.kt
+//  TrafficCounter
+//  Erstellt von Bengin Sternas am 11.05.2025, geupdatet am 14.05 waehrend des Livetermins
+//
+
 package de.thkoeln.vma.trafficcounter.ui.components
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -20,10 +28,14 @@ fun TrafficBottomNavigationBar(navController: NavController) {
 
     NavigationBar {
         NavigationBarItem(
+            icon = { Icon(Icons.Default.Add, contentDescription = "Zähler") },
+            label = { Text("Zähler") },
             selected = currentRoute == "counter",
             onClick = { navController.navigate("counter") }
         )
         NavigationBarItem(
+            icon = { Icon(Icons.AutoMirrored.Filled.List, contentDescription = "Auswertung") },
+            label = { Text("Auswertung") },
             selected = currentRoute == "list",
             onClick = { navController.navigate("list") }
         )

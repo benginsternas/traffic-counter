@@ -1,21 +1,20 @@
 //
 //  CounterScreen.kt
 //  TrafficCounter
-//  Erstellt von Bengin Sternas am 16.04.2025
+//  Erstellt von Bengin Sternas am 16.04.2025, geupdatet am 14.05 waehrend des Livetermins
 //
 
-package de.thkoeln.vma.trafficcounter
+package de.thkoeln.vma.trafficcounter.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import java.time.LocalDateTime
+import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModel
 
-// Composable für den CounterScreen
 @Composable
 fun CounterScreen(navController: NavController, viewModel: TrafficViewModel) {
     val bikeCount = viewModel.bikeCount.value
@@ -35,32 +34,14 @@ fun CounterScreen(navController: NavController, viewModel: TrafficViewModel) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Button zum Hinzufügen von Radfahrer:in
-        Button(onClick = {
-            viewModel.bikeCount.value++
-            viewModel.addTraffic(Traffic(Traffic.TrafficType.CYCLING, LocalDateTime.now(), "Haupteingang"))
-        }) {
+        Button(onClick = { viewModel.incrementBikeCount() }) {
             Text("Radfahrer:in")
         }
-
-        // Button zum Hinzufügen von Fußgänger:in
-        Button(onClick = {
-            viewModel.pedestrianCount.value++
-            viewModel.addTraffic(Traffic(Traffic.TrafficType.FOOT, LocalDateTime.now(), "Haupteingang"))
-        }) {
+        Button(onClick = { viewModel.incrementPedestrianCount() }) {
             Text("Fußgänger:in")
         }
-
-        // Button zum Zurücksetzen der Zähler
-        Button(onClick = {
-            viewModel.resetTraffic()
-        }) {
+        Button(onClick = { viewModel.resetCounts() }) {
             Text("Reset")
-        }
-
-        // Button zur Navigation zur Liste
-        Button(onClick = { navController.navigate("list") }) {
-            Text("Zur Liste")
         }
     }
 }
