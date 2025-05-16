@@ -1,6 +1,6 @@
 # TrafficCounter
 
-![App Demo](https://gitlab.nt.fh-koeln.de/gitlab/vma/praktikum/vma29/traffic-counter-29/-/blob/master/docs/demo.gif)
+![App Demo](docs/demo.gif)
 
 Die **TrafficCounter**-App ist eine einfache Android-Anwendung zur Verkehrszählung von Fußgänger:innen und Radfahrer:innen. Die App wurde im Rahmen des Moduls Programmierung verteilter und mobiler Anwendungen entwickelt.
 
