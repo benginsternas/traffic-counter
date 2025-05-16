@@ -1,67 +1,66 @@
 # TrafficCounter
 
-Die **TrafficCounter**-App ist eine einfache Android-Anwendung, die den Verkehr von Fußgänger:innen und Rradfahrer:innen zählt. Die App besteht aus zwei Hauptbildschirmen:
+![App Demo](demo.gif)
 
-1. **CounterScreen:**
-    - Zählt die Anzahl der Fußgänger:innen und Rradfahrer:innen.
-    - Zeigt die Gesamtanzahl der gezählten Personen an.
-    - Ermöglicht das Zurücksetzen der Zähler.
-    - Navigiert zur Liste der erfassten Daten.
+Die **TrafficCounter**-App ist eine einfache Android-Anwendung zur Verkehrszählung von Fußgänger:innen und Radfahrer:innen. Die App wurde im Rahmen des Moduls Programmierung verteilter und mobiler Anwendungen entwickelt.
 
-2. **ListScreen:**
-    - Zeigt eine Liste der erfassten Daten an, einschließlich Typ (Fußgänger:in oder Fahrradfahrer:in), Zeitstempel und Ort.
-    - Ermöglicht die Navigation zurück zum CounterScreen.
+## Features
 
----
+### Hauptfunktionen
+- **Verkehrszählung:**
+    - Separate Zähler für Fußgänger:innen und Radfahrer:innen
+    - Gesamtzahlberechnung
+    - Reset-Funktion für alle Zähler
 
-## Funktionen
+- **Datenverwaltung:**
+    - Speicherung aller Zählvorgänge mit Zeitstempel
+    - Anzeige der Historie in einer Liste
 
-- **Zählen von Fußgänger:innen und Radfahrer:innen:**
-  Über Buttons kann die Anzahl der Fußgänger:innen und Rradfahrer:innen erhöht werden.
+### Navigation
+- **BottomNavigationBar:**
+    - Zähler (CounterScreen)
+    - Auswertung (ListScreen)
 
-- **Anzeige der erfassten Daten:**
-  Die erfassten Daten werden in einer Liste angezeigt, die den Typ, den Zeitstempel und den Ort der Erfassung zeigt.
+- **TopAppBar mit Optionsmenü:**
+    - Navigation zu allen Screens
+    - Link zur TH Köln Website
 
-- **Zurücksetzen der Zähler:**
-  Ein Reset-Button setzt alle Zähler und die Liste der erfassten Daten zurück.
+### UI-Komponenten
+- Custom TopAppBar mit Menü
+- Custom BottomNavigationBar
+- Material3 Design-System
+- Responsive Layouts
 
-- **Navigation zwischen den Screens:**
-  Die App ermöglicht die Navigation zwischen dem CounterScreen und dem ListScreen.
+## Screens
 
----
+### 1. CounterScreen (Zähler)
+- Zählt Fußgänger:innen und Radfahrer:innen
+- Zeigt aktuelle Zählerstände an
+- Reset-Button zum Zurücksetzen
 
-## Technologien
+### 2. ListScreen (Auswertung)
+- Zeigt alle erfassten Daten an
 
-- **Jetpack Compose:**
-  Die Benutzeroberfläche wird mit Jetpack Compose erstellt, einem modernen UI-Toolkit für Android.
+### 3. InfoScreen
+- Zeigt Teaminformationen an
 
-- **ViewModel:**
-  Ein ViewModel wird verwendet, um die Daten zentral zu speichern und zwischen den Screens zu teilen.
+## Technische Implementierung
 
-- **Navigation Component:**
-  Die Navigation zwischen den Screens wird mit dem Navigation Component von Jetpack implementiert.
+### Architektur
+- **Jetpack Compose** für UI
+- **Navigation Component** für Screen-Navigation
+- **ViewModel** für Zustandsverwaltung
 
----
+### Wichtige Komponenten
+- **TrafficViewModel:** Verwaltet alle Zähldaten
+- **TrafficBottomNavigationBar:** Custom Navigation-Komponente
+- **TrafficTopAppBar:** Custom AppBar mit Menü
 
-## Installation und Verwendung
+## Entwickler:in
+Dieses Projekt wurde von Bengin Sternas entwickelt.
 
-1. **Projekt klonen:**
-   Klone das Repository auf deinen Rechner.
+## Installation
 
-2. **Abhängigkeiten installieren:**
-   Stelle sicher, dass alle Abhängigkeiten in der `build.gradle`-Datei installiert sind.
-
-3. **App ausführen:**
-   Öffne das Projekt in Android Studio und führe die App auf einem Emulator oder einem physischen Gerät aus.
-
----
-
-## Screenshots
-
-<img alt="CounterScreen" src="Screenshots/CounterScreen.png" title="CounterScreen" width="450"/> <img alt="ListScreen" src="Screenshots/ListScreen.png" title="ListScreen" width="450"/>
-
----
-
-## Autor
-
-Dieses Projekt wurde von Bengin Sternas erstellt.
+1. Projekt klonen:
+   ```bash
+   git clone https://gitlab.nt.fh-koeln.de/vma/runde1/traffic-counter-29.git
