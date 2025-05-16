@@ -63,4 +63,4 @@ Dieses Projekt wurde von Bengin Sternas entwickelt.
 
 1. Projekt klonen:
    ```bash
-   git clone https://gitlab.nt.fh-koeln.de/vma/runde1/traffic-counter-29.git
+   git clone https://gitlab.nt.fh-koeln.de/gitlab/vma/praktikum/vma29/traffic-counter-29.git
