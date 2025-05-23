@@ -1,7 +1,8 @@
 //
 //  MainActivity.kt
 //  TrafficCounter
-//  Erstellt von Bengin Sternas am 16.04.2025, geupdatet am 14.05 waehrend des Livetermins
+//  Erstellt von Bengin Sternas am 16.04.2025, geupdatet am 14.05 waehrend des Livetermins.
+//  Letzte Update 24.05 (issue#3)
 //
 
 package de.thkoeln.vma.trafficcounter
@@ -9,15 +10,13 @@ package de.thkoeln.vma.trafficcounter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -28,8 +27,15 @@ import de.thkoeln.vma.trafficcounter.ui.screens.InfoScreen
 import de.thkoeln.vma.trafficcounter.ui.screens.ListScreen
 import de.thkoeln.vma.trafficcounter.ui.theme.TrafficCounterTheme
 import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModel
+import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModelFactory
 
 class MainActivity : ComponentActivity() {
+
+    // Die ViewModel-Initialisierung gemäß Aufgabenblatt Punkt A 1.3 (issue#3)
+    private val trafficViewModel: TrafficViewModel by viewModels {
+        TrafficViewModelFactory()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -39,7 +45,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    val viewModel: TrafficViewModel = viewModel()
 
                     Scaffold(
                         topBar = { TrafficTopAppBar(navController) },
@@ -53,13 +58,13 @@ class MainActivity : ComponentActivity() {
                             composable("counter") {
                                 CounterScreen(
                                     navController = navController,
-                                    viewModel = viewModel
+                                    viewModel = trafficViewModel
                                 )
                             }
                             composable("list") {
                                 ListScreen(
                                     navController = navController,
-                                    viewModel = viewModel
+                                    viewModel = trafficViewModel
                                 )
                             }
                             composable("info") {
