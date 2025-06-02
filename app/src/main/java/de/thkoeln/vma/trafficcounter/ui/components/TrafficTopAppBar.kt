@@ -63,9 +63,17 @@ fun TrafficTopAppBar(navController: NavController) {
                     }
                 )
                 DropdownMenuItem(
-                    text = { Text("TH Köln") },
+                    text = { Text("TH Köln Website") },
                     onClick = {
                         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.th-koeln.de"))
+                        context.startActivity(intent)
+                        expanded = false
+                    }
+                )
+                DropdownMenuItem(
+                    text = { Text("TH Köln IWZ Map") },
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo: 50.933907078144536, 6.988620039426897"))
                         context.startActivity(intent)
                         expanded = false
                     }
