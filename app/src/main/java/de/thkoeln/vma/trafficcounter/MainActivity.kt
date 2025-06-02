@@ -31,7 +31,6 @@ import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
-    // Die ViewModel-Initialisierung gemäß Aufgabenblatt Punkt A 1.3 (issue#3)
     private val trafficViewModel: TrafficViewModel by viewModels {
         TrafficViewModelFactory()
     }
@@ -47,7 +46,9 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
 
                     Scaffold(
-                        topBar = { TrafficTopAppBar(navController) },
+                        topBar = {
+                            TrafficTopAppBar(navController)
+                        },
                         bottomBar = { TrafficBottomNavigationBar(navController) }
                     ) { innerPadding ->
                         NavHost(

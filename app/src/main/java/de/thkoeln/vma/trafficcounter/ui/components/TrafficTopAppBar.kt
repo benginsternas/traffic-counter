@@ -73,7 +73,7 @@ fun TrafficTopAppBar(navController: NavController) {
                 DropdownMenuItem(
                     text = { Text("TH Köln IWZ Map") },
                     onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo: 50.933907078144536, 6.988620039426897"))
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:50.933907078144536,6.988620039426897"))
                         context.startActivity(intent)
                         expanded = false
                     }
