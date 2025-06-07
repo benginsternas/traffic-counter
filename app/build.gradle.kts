@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -40,10 +41,15 @@ android {
 }
 
 dependencies {
-
     // Wird ab Aufgabenblatt 1 benötigt für die Navigation, also den NavController und den NavHost
     val nav_version = "2.8.6"
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    // Room dependencies
+    val roomVersion = "2.7.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
