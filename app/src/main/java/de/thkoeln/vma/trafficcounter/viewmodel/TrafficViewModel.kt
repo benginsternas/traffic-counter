@@ -1,44 +1,93 @@
 //
 //  TrafficViewModel.kt
 //  TrafficCounter
-//  Erstellt von Bengin Sternas am 16.04.2025, geupdatet am 14.05 waehrend des Livetermins
+//  Erstellt von Bengin Sternas am 16.04.2025
+//  Letzte update 08.06.2025
 //
 
 package de.thkoeln.vma.trafficcounter.viewmodel
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import de.thkoeln.vma.trafficcounter.Traffic
+import androidx.lifecycle.viewModelScope
+import de.thkoeln.vma.trafficcounter.model.data.entities.Traffic
+import de.thkoeln.vma.trafficcounter.model.data.repository.TrafficRepository
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
-class TrafficViewModel : ViewModel() {
-    // Liste der erfassten Daten
-    private val _trafficList = mutableListOf<Traffic>()
-    val trafficList: List<Traffic> get() = _trafficList
+class TrafficViewModel(private val repository: TrafficRepository) : ViewModel() {
 
-    // Zähler für Radfahrer:in und Fußgänger:in
-    var bikeCount = mutableStateOf(0)
-    var pedestrianCount = mutableStateOf(0)
-    val totalCount: Int get() = bikeCount.value + pedestrianCount.value
+    val totalTraffic: StateFlow<List<Traffic>> = repository.totalTraffic.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
 
-    // Funktionen zum Hinzufügen und Zurücksetzen der Daten
+    val cyclingTraffic: StateFlow<List<Traffic>> = repository.cyclingTraffic.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
+
+    val footTraffic: StateFlow<List<Traffic>> = repository.footTraffic.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
+
+    val bikeCount: StateFlow<Int> = repository.getCyclingTrafficCount().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = 0
+    )
+
+    val pedestrianCount: StateFlow<Int> = repository.getFootTrafficCount().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = 0
+    )
+
+    val totalCount: StateFlow<Int> = repository.getTotalTrafficCount().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = 0
+    )
+
     fun addTraffic(traffic: Traffic) {
-        _trafficList.add(traffic)
+        viewModelScope.launch {
+            repository.insertTraffic(traffic)
+        }
     }
 
     fun incrementBikeCount() {
-        bikeCount.value++
-        addTraffic(Traffic(Traffic.TrafficType.CYCLING, LocalDateTime.now(), "Haupteingang"))
+        viewModelScope.launch {
+            repository.insertTraffic(
+                Traffic(
+                    trafficType = Traffic.TrafficType.CYCLING,
+                    date = LocalDateTime.now(),
+                    note = "Haupteingang"
+                )
+            )
+        }
     }
 
     fun incrementPedestrianCount() {
-        pedestrianCount.value++
-        addTraffic(Traffic(Traffic.TrafficType.FOOT, LocalDateTime.now(), "Haupteingang"))
+        viewModelScope.launch {
+            repository.insertTraffic(
+                Traffic(
+                    trafficType = Traffic.TrafficType.FOOT,
+                    date = LocalDateTime.now(),
+                    note = "Haupteingang"
+                )
+            )
+        }
     }
 
     fun resetCounts() {
-        _trafficList.clear()
-        bikeCount.value = 0
-        pedestrianCount.value = 0
+        viewModelScope.launch {
+            repository.deleteAllTraffic()
+        }
     }
 }

@@ -1,18 +1,20 @@
 //
 //  TrafficViewModelFactory.kt
 //  TrafficCounter
-//  Erstellt von Bengin Sternas am 11.05.2025, geupdatet am 14.05 waehrend des Livetermins
+//  Erstellt von Bengin Sternas am 11.05.2025
+//  Letzte update 08.06.2025
 //
 package de.thkoeln.vma.trafficcounter.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import de.thkoeln.vma.trafficcounter.model.data.repository.TrafficRepository
 
-class TrafficViewModelFactory : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
+class TrafficViewModelFactory(private val repository: TrafficRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TrafficViewModel::class.java)) {
-            return TrafficViewModel() as T
+            @Suppress("UNCHECKED_CAST")
+            return TrafficViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

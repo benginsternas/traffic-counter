@@ -1,7 +1,8 @@
 //
 //  TrafficCard.kt
 //  TrafficCounter
-//  Erstellt von Bengin Sternas am 16.04.2025, geupdatet am 14.05 waehrend des Livetermins
+//  Erstellt von Bengin Sternas am 16.04.2025
+//  Letzte update 08.06.2025
 //
 
 package de.thkoeln.vma.trafficcounter
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import de.thkoeln.vma.trafficcounter.model.data.entities.Traffic
 import java.time.format.DateTimeFormatter
 
 @Composable

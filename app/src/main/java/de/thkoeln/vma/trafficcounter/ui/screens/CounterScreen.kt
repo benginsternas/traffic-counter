@@ -1,7 +1,8 @@
 //
 // CounterScreen.kt
 // TrafficCounter
-// Erstellt von Bengin Sternas am 16.04.2025, geupdatet am 14.05 während des Livetermins
+// Erstellt von Bengin Sternas am 16.04.2025
+// Letzte update 08.06.2025
 //
 
 package de.thkoeln.vma.trafficcounter.ui.screens
@@ -17,12 +18,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import de.thkoeln.vma.trafficcounter.ui.components.CleanDatabaseDialog
 import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModel
+import androidx.compose.runtime.collectAsState
 
 @Composable
 fun CounterScreen(navController: NavController, viewModel: TrafficViewModel) {
-    val bikeCount = viewModel.bikeCount.value
-    val pedestrianCount = viewModel.pedestrianCount.value
-    val totalCount = viewModel.totalCount
+    val bikeCount by viewModel.bikeCount.collectAsState(initial = 0)
+    val pedestrianCount by viewModel.pedestrianCount.collectAsState(initial = 0)
+    val totalCount by viewModel.totalCount.collectAsState(initial = 0)
+
     val showDialog = remember { mutableStateOf(false) }
 
     Column(

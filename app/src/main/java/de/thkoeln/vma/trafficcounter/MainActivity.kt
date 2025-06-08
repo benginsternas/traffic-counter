@@ -1,8 +1,8 @@
 //
 //  MainActivity.kt
 //  TrafficCounter
-//  Erstellt von Bengin Sternas am 16.04.2025, geupdatet am 14.05 waehrend des Livetermins.
-//  Letzte Update 24.05 (issue#3)
+//  Erstellt von Bengin Sternas am 16.04.2025
+//  Letzte update 08.06.2025
 //
 
 package de.thkoeln.vma.trafficcounter
@@ -32,7 +32,7 @@ import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModelFactory
 class MainActivity : ComponentActivity() {
 
     private val trafficViewModel: TrafficViewModel by viewModels {
-        TrafficViewModelFactory()
+        TrafficViewModelFactory((application as TrafficApplication).repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

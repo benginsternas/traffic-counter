@@ -1,7 +1,8 @@
 //
 //  ListScreen.kt
 //  TrafficCounter
-//  Erstellt von Bengin Sternas am 16.04.2025, geupdatet am 14.05 waehrend des Livetermins
+//  Erstellt von Bengin Sternas am 16.04.2025
+//  Letzte update 08.06.2025
 //
 
 package de.thkoeln.vma.trafficcounter.ui.screens
@@ -11,6 +12,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -20,7 +23,7 @@ import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModel
 
 @Composable
 fun ListScreen(navController: NavController, viewModel: TrafficViewModel) {
-    val traffics = viewModel.trafficList
+    val traffics by viewModel.totalTraffic.collectAsState(initial = emptyList())
 
     Column(
         modifier = Modifier
