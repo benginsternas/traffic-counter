@@ -1,6 +1,6 @@
 # TrafficCounter
 
-![App Demo](docs/demo.gif)
+<img src="docs/demo.gif" alt="App Demo" width="270" height="585"/>
 
 Die **TrafficCounter**-App ist eine einfache Android-Anwendung zur Verkehrszählung von Fußgänger:innen und Radfahrer:innen. Die App wurde im Rahmen des Moduls Programmierung verteilter und mobiler Anwendungen entwickelt.
 
