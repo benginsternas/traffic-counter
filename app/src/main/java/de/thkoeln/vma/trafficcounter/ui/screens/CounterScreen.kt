@@ -18,15 +18,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import de.thkoeln.vma.trafficcounter.ui.components.CleanDatabaseDialog
 import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModel
-import androidx.compose.runtime.collectAsState
 
 @Composable
 fun CounterScreen(navController: NavController, viewModel: TrafficViewModel) {
     val bikeCount by viewModel.bikeCount.collectAsState(initial = 0)
     val pedestrianCount by viewModel.pedestrianCount.collectAsState(initial = 0)
     val totalCount by viewModel.totalCount.collectAsState(initial = 0)
-
     val showDialog = remember { mutableStateOf(false) }
+    val isPrecipitationChecked = remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -39,12 +38,24 @@ fun CounterScreen(navController: NavController, viewModel: TrafficViewModel) {
         Text("Fußgängerverkehr: $pedestrianCount")
         Text("Gesamtverkehr: $totalCount")
 
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Checkbox(
+                checked = isPrecipitationChecked.value,
+                onCheckedChange = { isChecked -> isPrecipitationChecked.value = isChecked }
+            )
+            Text("Niederschlag")
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { viewModel.incrementBikeCount() }) {
+        Button(onClick = {
+            viewModel.incrementBikeCount(isPrecipitationChecked.value)
+        }) {
             Text("Radfahrer:in")
         }
-        Button(onClick = { viewModel.incrementPedestrianCount() }) {
+        Button(onClick = {
+            viewModel.incrementPedestrianCount(isPrecipitationChecked.value)
+        }) {
             Text("Fußgänger:in")
         }
         Button(onClick = { showDialog.value = true }) {

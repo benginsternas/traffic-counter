@@ -55,31 +55,27 @@ class TrafficViewModel(private val repository: TrafficRepository) : ViewModel() 
         initialValue = 0
     )
 
-    fun addTraffic(traffic: Traffic) {
-        viewModelScope.launch {
-            repository.insertTraffic(traffic)
-        }
-    }
-
-    fun incrementBikeCount() {
+    fun incrementBikeCount(precipitation: Boolean) {
         viewModelScope.launch {
             repository.insertTraffic(
                 Traffic(
                     trafficType = Traffic.TrafficType.CYCLING,
                     date = LocalDateTime.now(),
-                    note = "Haupteingang"
+                    note = "Haupteingang",
+                    precipitation = precipitation
                 )
             )
         }
     }
 
-    fun incrementPedestrianCount() {
+    fun incrementPedestrianCount(precipitation: Boolean) {
         viewModelScope.launch {
             repository.insertTraffic(
                 Traffic(
                     trafficType = Traffic.TrafficType.FOOT,
                     date = LocalDateTime.now(),
-                    note = "Haupteingang"
+                    note = "Haupteingang",
+                    precipitation = precipitation
                 )
             )
         }
@@ -88,6 +84,12 @@ class TrafficViewModel(private val repository: TrafficRepository) : ViewModel() 
     fun resetCounts() {
         viewModelScope.launch {
             repository.deleteAllTraffic()
+        }
+    }
+
+    fun deleteTraffic(traffic: Traffic) {
+        viewModelScope.launch {
+            repository.deleteTraffic(traffic)
         }
     }
 }

@@ -14,17 +14,14 @@ import kotlinx.coroutines.flow.Flow
 
 class TrafficRepository(private val trafficDao: TrafficDao) {
 
-    // Flows to observe data from the database
     val totalTraffic: Flow<List<Traffic>> = trafficDao.getTotalTraffic()
     val cyclingTraffic: Flow<List<Traffic>> = trafficDao.getCyclingTraffic()
     val footTraffic: Flow<List<Traffic>> = trafficDao.getFootTraffic()
 
-    // Function to get counts of different traffic types
     fun getCyclingTrafficCount(): Flow<Int> = trafficDao.getCyclingTrafficCount()
     fun getFootTrafficCount(): Flow<Int> = trafficDao.getFootTrafficCount()
     fun getTotalTrafficCount(): Flow<Int> = trafficDao.getTotalTrafficCount()
 
-    // Suspend functions for database operations
     @WorkerThread
     suspend fun insertTraffic(traffic: Traffic) {
         trafficDao.insertTraffic(traffic)
@@ -33,5 +30,10 @@ class TrafficRepository(private val trafficDao: TrafficDao) {
     @WorkerThread
     suspend fun deleteAllTraffic() {
         trafficDao.deleteAllTraffic()
+    }
+
+    @WorkerThread
+    suspend fun deleteTraffic(traffic: Traffic) {
+        trafficDao.deleteTraffic(traffic)
     }
 }

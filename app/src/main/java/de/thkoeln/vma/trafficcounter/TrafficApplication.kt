@@ -13,8 +13,6 @@ import de.thkoeln.vma.trafficcounter.model.data.repository.TrafficRepository
 
 class TrafficApplication : Application() {
 
-    // Lazy initialization
-    // Database als Private markieren
     private val database by lazy { TrafficDatabase.getDatabase(this) }
-    val repository by lazy { TrafficRepository(database.trafficDao()) }
+    val repository: TrafficRepository by lazy { TrafficRepository(database.trafficDao()) }
 }

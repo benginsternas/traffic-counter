@@ -8,31 +8,19 @@
 package de.thkoeln.vma.trafficcounter.model.data.database
 
 import androidx.room.TypeConverter
-import de.thkoeln.vma.trafficcounter.model.data.entities.Traffic
-import java.time.Instant
 import java.time.LocalDateTime
-import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
-class TrafficTypeConverters {
+class Converters {
+    private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+
     @TypeConverter
-    fun fromTrafficType(trafficType: Traffic.TrafficType): Int {
-        return trafficType.ordinal
+    fun fromLocalDateTime(dateTime: LocalDateTime?): String? {
+        return dateTime?.format(formatter)
     }
 
     @TypeConverter
-    fun toTrafficType(value: Int): Traffic.TrafficType {
-        return Traffic.TrafficType.entries[value]
-    }
-
-    @TypeConverter
-    fun fromTimestamp(value: Long?): LocalDateTime? {
-        return value?.let {
-            LocalDateTime.ofInstant(Instant.ofEpochMilli(it), ZoneId.systemDefault())
-        }
-    }
-
-    @TypeConverter
-    fun toTimestamp(date: LocalDateTime?): Long? {
-        return date?.atZone(ZoneId.systemDefault())?.toInstant()?.toEpochMilli()
+    fun toLocalDateTime(dateTime: String?): LocalDateTime? {
+        return dateTime?.let { LocalDateTime.parse(it, formatter) }
     }
 }

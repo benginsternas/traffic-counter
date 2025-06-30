@@ -11,12 +11,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 
-@Entity(tableName = "Traffic")
+@Entity(tableName = "traffic")
 data class Traffic(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val trafficType: TrafficType,
     val date: LocalDateTime,
-    val note: String
+    val note: String,
+    val precipitation: Boolean = false // Neues Feld für Niederschlag
 ) {
     enum class TrafficType {
         CYCLING, FOOT

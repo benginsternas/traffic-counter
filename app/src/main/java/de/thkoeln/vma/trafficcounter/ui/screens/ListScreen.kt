@@ -18,7 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import de.thkoeln.vma.trafficcounter.TrafficCard
+import de.thkoeln.vma.trafficcounter.ui.components.TrafficCard
 import de.thkoeln.vma.trafficcounter.viewmodel.TrafficViewModel
 
 @Composable
@@ -37,7 +37,6 @@ fun ListScreen(navController: NavController, viewModel: TrafficViewModel) {
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 16.dp)
         )
-
         if (traffics.isEmpty()) {
             Text(
                 text = "Keine Daten verfügbar",
@@ -51,7 +50,10 @@ fun ListScreen(navController: NavController, viewModel: TrafficViewModel) {
                     .fillMaxWidth()
             ) {
                 items(traffics) { traffic ->
-                    TrafficCard(traffic = traffic)
+                    TrafficCard(
+                        traffic = traffic,
+                        onDelete = { viewModel.deleteTraffic(traffic) }
+                    )
                     HorizontalDivider(
                         modifier = Modifier.padding(horizontal = 16.dp),
                         thickness = 1.dp,

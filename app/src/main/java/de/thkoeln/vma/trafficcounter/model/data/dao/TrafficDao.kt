@@ -8,6 +8,7 @@
 package de.thkoeln.vma.trafficcounter.model.data.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import de.thkoeln.vma.trafficcounter.model.data.entities.Traffic
@@ -21,24 +22,24 @@ interface TrafficDao {
     @Query("SELECT * FROM traffic")
     fun getTotalTraffic(): Flow<List<Traffic>>
 
-    @Query("SELECT * FROM traffic WHERE trafficType = 0")
+    @Query("SELECT * FROM traffic WHERE trafficType = 'CYCLING'")
     fun getCyclingTraffic(): Flow<List<Traffic>>
 
-    @Query("SELECT * FROM traffic WHERE trafficType = 1")
+    @Query("SELECT * FROM traffic WHERE trafficType = 'FOOT'")
     fun getFootTraffic(): Flow<List<Traffic>>
 
-    @Query("DELETE FROM traffic")
-    suspend fun deleteAllTraffic()
-
-    @Query("SELECT * FROM traffic WHERE id = :id")
-    fun getTrafficById(id: Int): Flow<Traffic>
-
-    @Query("SELECT COUNT(*) FROM traffic WHERE trafficType = 0")
+    @Query("SELECT COUNT(*) FROM traffic WHERE trafficType = 'CYCLING'")
     fun getCyclingTrafficCount(): Flow<Int>
 
-    @Query("SELECT COUNT(*) FROM traffic WHERE trafficType = 1")
+    @Query("SELECT COUNT(*) FROM traffic WHERE trafficType = 'FOOT'")
     fun getFootTrafficCount(): Flow<Int>
 
     @Query("SELECT COUNT(*) FROM traffic")
     fun getTotalTrafficCount(): Flow<Int>
+
+    @Query("DELETE FROM traffic")
+    suspend fun deleteAllTraffic()
+
+    @Delete
+    suspend fun deleteTraffic(traffic: Traffic)
 }

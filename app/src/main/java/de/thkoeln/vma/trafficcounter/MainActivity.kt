@@ -49,7 +49,9 @@ class MainActivity : ComponentActivity() {
                         topBar = {
                             TrafficTopAppBar(navController)
                         },
-                        bottomBar = { TrafficBottomNavigationBar(navController) }
+                        bottomBar = {
+                            TrafficBottomNavigationBar(navController)
+                        }
                     ) { innerPadding ->
                         NavHost(
                             navController = navController,
